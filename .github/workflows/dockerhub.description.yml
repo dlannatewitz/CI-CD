@@ -17,5 +17,5 @@ jobs:
           user: ${{secrets.DOCKER_USERNAME}}
           pass: ${{secrets.DOCKER_PASSWORD}}
           slug: dlannatewitz/cicd
-          readme: ./docker/description.md
+          readme: ./docker/docker.md
           description: true
