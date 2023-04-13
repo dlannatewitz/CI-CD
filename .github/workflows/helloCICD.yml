@@ -34,5 +34,5 @@ jobs:
       - name: Run a one-line script
         run: |
           cd cdci_app
-          npm intall
+          npm install
           ionic build --release
