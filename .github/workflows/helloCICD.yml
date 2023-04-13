@@ -55,7 +55,7 @@ jobs:
       - name: download build artifacts
         uses: actions/download-artifact@v1 
         with:
-          name: buils
+          name: build
 
       - name: Publish to registry
         uses: elgohr/Publish-Docker-Github-Action@master 
