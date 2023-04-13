@@ -1,0 +1,21 @@
+name: Dockerhub sync
+on:
+  push:
+    path:
+      - docs/docker.md
+      - .github/workflows/dockerhub.description.yml
+
+#jobs
+jobs: 
+  docker-sync:
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@master
+
+      - uses: meedamian/sync-readme@v1.0.6
+        with:
+          user: ${{secrets.DOCKER_USERNAME}}
+          pass: ${{secrets.DOCKER_PASSWORD}}
+          slug: dlannatewitz/cicd
+          readme: ./docker/description.md
+          description: true
