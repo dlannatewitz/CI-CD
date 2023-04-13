@@ -22,13 +22,14 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Use coturiv/setup-ionic
+      - name: Use coturiv/setup-ionic got ionic setup
         uses: coturiv/setup-ionic@v1
         with:
           cordova-version: 8
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - name: Checkout the sources
+        uses: actions/checkout@v3
 
       # Runs a multi-line command using the runners shell
       - name: Ionic build
@@ -42,3 +43,25 @@ jobs:
         with: 
           name: build
           path: cdci_app/www
+  
+  deploy:
+    name: Dockerhub deployment
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the sources
+        uses: actions/checkout@v3
+
+      - name: download build artifacts
+        uses: actions/download-artifact@v1 
+        with:
+          name: buils
+
+      - name: Publish to registry
+        uses: elgohr/Publish-Docker-Github-Action@master 
+        with:
+          name: dlannatewitz/cicd
+          username: ${{secrets.DOCKER_USERNAME}}
+          password: ${{secrets.DOCKER_PASSWORD}}
+
+        
